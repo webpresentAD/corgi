@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<meta name="description" content="Corgi's Cafe – Хубаво кафе, вкусна веган храна и приятна компания на корги кученца в сърцето на София. Ул. Христо Белчев 8а."/>
+<meta property="og:title" content="Corgi's Cafe – Food · Bar · Sofia"/>
+<meta property="og:description" content="Най-уютното местенце в София с вкусна веган храна и очарователни корги."/>
+<meta name="theme-color" content="#0d0b08"/>
+<title>Corgi's Cafe – Food · Bar · Sofia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+<style>
+/* ===== RESET & VARIABLES ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#0d0b08;--bg2:#131109;--bg3:#1a1710;
+  --surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.08);
+  --border:rgba(255,200,100,0.12);
+  --orange:#f5a623;--orange2:#e8881a;--orange3:#ffc875;
+  --cream:#fdf6e8;--text:#f0e8d6;--text2:#a89070;--text3:#6b5c45;
+  --glow:rgba(245,166,35,0.25);--glow2:rgba(245,166,35,0.08);
+  --fd:'Playfair Display',serif;--fs:'DM Sans',sans-serif;--fc:'Dancing Script',cursive;
+  --r:16px;--r2:24px;--shadow:0 24px 60px rgba(0,0,0,0.6);
+}
+body{background:var(--bg);color:var(--text);font-family:var(--fs);font-weight:400;line-height:1.6;overflow-x:hidden;cursor:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:none;font-family:var(--fs)}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--orange2);border-radius:99px}
+
+/* ===== CURSOR ===== */
+#cursor{position:fixed;width:12px;height:12px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:99999;transition:transform .15s,opacity .2s;mix-blend-mode:screen;transform:translate(-50%,-50%)}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(245,166,35,.5);border-radius:50%;pointer-events:none;z-index:99998;transition:transform .4s cubic-bezier(.23,1,.32,1),width .3s,height .3s;transform:translate(-50%,-50%)}
+body.ch #cursor{transform:translate(-50%,-50%) scale(2.5)}
+body.ch #cursor-ring{width:52px;height:52px;border-color:var(--orange)}
+
+/* ===== LOADER ===== */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:99990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .8s,visibility .8s}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.lc{font-size:80px;animation:lb .7s ease-in-out infinite alternate}
+@keyframes lb{from{transform:translateY(0) rotate(-6deg)}to{transform:translateY(-18px) rotate(6deg)}}
+.lbw{width:200px;height:3px;background:var(--border);border-radius:99px;overflow:hidden}
+.lbar{height:100%;background:linear-gradient(90deg,var(--orange2),var(--orange3));width:0%;transition:width .04s linear}
+.ltxt{font-size:12px;letter-spacing:.22em;color:var(--text2);text-transform:uppercase;font-family:var(--fs)}
+.lname{font-family:var(--fc);font-size:32px;color:var(--orange3)}
+
+/* ===== PAW TRAIL ===== */
+.paw-t{position:fixed;pointer-events:none;z-index:9999;font-size:16px;animation:pf .9s ease forwards;transform:translate(-50%,-50%)}
+@keyframes pf{0%{opacity:.7;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(25deg)}}
+
+/* ===== UTILITIES ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:16px}
+.stag::before,.stag::after{content:'';display:block;width:24px;height:1px;background:var(--orange);opacity:.5}
+.stitle{font-family:var(--fd);font-size:clamp(34px,5vw,68px);font-weight:700;line-height:1.05;color:var(--cream)}
+.stitle span{color:var(--orange);font-style:italic}
+.ssub{font-size:16px;color:var(--text2);max-width:520px;line-height:1.75;margin-top:12px}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.sep{width:1px;height:80px;background:linear-gradient(180deg,transparent,var(--border));margin:0 auto}
+
+/* ===== BUTTONS ===== */
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--bg);border:none;padding:16px 32px;border-radius:99px;font-size:15px;font-weight:600;transition:all .3s;position:relative;overflow:hidden}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .5s}
+.btn-p:hover::before{transform:translateX(100%)}
+.btn-p:hover{background:var(--orange3);transform:translateY(-2px);box-shadow:0 8px 30px var(--glow)}
+.btn-s{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--cream);border:1px solid var(--border);padding:16px 32px;border-radius:99px;font-size:15px;font-weight:500;transition:all .3s;backdrop-filter:blur(10px)}
+.btn-s:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px);background:var(--glow2)}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:background .4s,padding .4s}
+nav.sc{background:rgba(13,11,8,.88);backdrop-filter:blur(20px);padding:12px 0;border-bottom:1px solid var(--border)}
+.ni{display:flex;align-items:center;justify-content:space-between}
+.nlogo{font-family:var(--fc);font-size:26px;color:var(--orange3);display:flex;align-items:center;gap:6px}
+.nlinks{display:flex;gap:28px;list-style:none}
+.nlinks a{font-size:13px;font-weight:500;letter-spacing:.07em;color:var(--text2);transition:color .2s;position:relative}
+.nlinks a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--orange);transform:scaleX(0);transition:transform .3s}
+.nlinks a:hover{color:var(--cream)}
+.nlinks a:hover::after{transform:scaleX(1)}
+.lsw{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:4px}
+.lb2{background:none;border:none;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--text3);transition:all .2s}
+.lb2.act{background:var(--orange);color:var(--bg)}
+.nr{display:flex;align-items:center;gap:14px}
+.ncta{background:var(--orange);color:var(--bg);border:none;padding:10px 20px;border-radius:99px;font-size:13px;font-weight:600;transition:all .25s;white-space:nowrap}
+.ncta:hover{background:var(--orange3);transform:translateY(-1px);box-shadow:0 6px 20px var(--glow)}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.mmenu{display:none;position:fixed;inset:0;top:65px;background:rgba(13,11,8,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999}
+.mmenu.open{display:flex}
+.mmenu a{font-family:var(--fd);font-size:30px;font-style:italic;color:var(--cream);transition:color .2s}
+.mmenu a:hover{color:var(--orange)}
+.mmenu .mlang{display:flex;gap:8px;margin-top:16px}
+.mmenu .mlang button{background:none;border:1px solid var(--border);color:var(--text2);padding:8px 20px;border-radius:99px;font-size:14px;font-weight:600}
+.mmenu .mlang button.act{background:var(--orange);border-color:var(--orange);color:var(--bg)}
+
+/* ===== HERO ===== */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;z-index:0}
+.hbg2{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 28% 55%,rgba(245,166,35,.13) 0%,transparent 60%),radial-gradient(ellipse at 72% 18%,rgba(232,136,26,.08) 0%,transparent 50%),linear-gradient(180deg,transparent 55%,var(--bg) 100%)}
+.hcont{position:relative;z-index:2;padding:140px 0 100px}
+.htag{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:8px 18px;font-size:12px;font-weight:500;letter-spacing:.15em;color:var(--orange3);margin-bottom:32px;backdrop-filter:blur(10px)}
+.hdot{width:6px;height:6px;background:var(--orange);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
+.hh1{font-family:var(--fd);font-size:clamp(42px,7.5vw,106px);font-weight:900;line-height:1;color:var(--cream);margin-bottom:10px}
+.hh1 em{color:var(--orange);font-style:italic}
+.hh2{font-family:var(--fd);font-size:clamp(18px,3vw,34px);font-weight:400;font-style:italic;color:var(--text2);margin-bottom:22px}
+.hdesc{font-size:17px;color:var(--text2);max-width:520px;line-height:1.8;margin-bottom:40px}
+.hact{display:flex;gap:16px;flex-wrap:wrap}
+.hstats{display:flex;gap:40px;margin-top:64px;flex-wrap:wrap}
+.stat-n{font-family:var(--fd);font-size:38px;font-weight:900;color:var(--orange);line-height:1}
+.stat-l{font-size:11px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.hcorgi{position:absolute;right:2%;bottom:6%;z-index:2;font-size:clamp(80px,14vw,190px);animation:fcorgi 4s ease-in-out infinite;filter:drop-shadow(0 20px 40px rgba(245,166,35,.3));pointer-events:none}
+@keyframes fcorgi{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-22px) rotate(3deg)}}
+.scroll-h{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
+.scroll-h span{font-size:10px;letter-spacing:.22em;color:var(--text3);text-transform:uppercase}
+.sarrow{width:22px;height:22px;border-right:1.5px solid var(--orange);border-bottom:1.5px solid var(--orange);transform:rotate(45deg);animation:sb 1.5s ease-in-out infinite}
+@keyframes sb{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(7px)}}
+
+/* ===== ABOUT ===== */
+#about{padding:120px 0;position:relative}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.aim{position:relative;border-radius:var(--r2);overflow:hidden}
+.aim-inner{width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,rgba(245,166,35,.12),rgba(232,136,26,.06));border-radius:var(--r2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:160px;position:relative;overflow:hidden}
+.aim-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 0%,transparent 40%)}
+.aim-badge{position:absolute;bottom:24px;left:24px;z-index:2;background:rgba(13,11,8,.88);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px}
+.aim-badge .big{font-size:26px;font-weight:700;color:var(--orange);font-family:var(--fd)}
+.aim-badge .sm{font-size:12px;color:var(--text2)}
+.afeats{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.fi{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);transition:all .3s}
+.fi:hover{background:var(--surface2);border-color:rgba(245,166,35,.25);transform:translateX(5px)}
+.fi-icon{font-size:28px;flex-shrink:0}
+.fi-t{font-size:15px;font-weight:600;color:var(--cream);margin-bottom:3px}
+.fi-d{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* ===== MENU ===== */
+#menu{padding:120px 0;background:var(--bg2);position:relative;overflow:hidden}
+#menu::before{content:'🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾';position:absolute;top:0;left:0;right:0;font-size:20px;letter-spacing:8px;opacity:.05;white-space:nowrap;overflow:hidden;line-height:1}
+.mhdr{text-align:center;margin-bottom:48px}
+.mtabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.mtab{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:10px 20px;border-radius:99px;font-size:13px;font-weight:500;letter-spacing:.05em;transition:all .25s;outline:none}
+.mtab.act{background:var(--orange);border-color:var(--orange);color:var(--bg);font-weight:600}
+.mtab:hover:not(.act){border-color:var(--orange);color:var(--orange)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.mpanel{display:none}
+.mpanel.act{display:block}
+.mc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:24px;transition:all .3s;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange2),var(--orange3));transform:scaleX(0);transition:transform .3s}
+.mc:hover{border-color:rgba(245,166,35,.3);background:var(--surface2);transform:translateY(-4px);box-shadow:var(--shadow)}
+.mc:hover::before{transform:scaleX(1)}
+.mc-em{font-size:40px;margin-bottom:16px}
+.mc-n{font-family:var(--fd);font-size:18px;font-weight:700;color:var(--cream);margin-bottom:8px;line-height:1.3}
+.mc-d{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+.mc-f{display:flex;align-items:center;justify-content:space-between}
+.mc-p{font-family:var(--fd);font-size:22px;font-weight:700;color:var(--orange)}
+.mc-tag{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(245,166,35,.1);color:var(--orange3);border:1px solid rgba(245,166,35,.2)}
+.mcta{text-align:center;margin-top:48px}
+
+/* ===== CORGIS ===== */
+#corgis{padding:120px 0;position:relative}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.ccard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:all .4s;position:relative}
+.ccard:hover{border-color:rgba(245,166,35,.4);transform:translateY(-8px);box-shadow:0 32px 80px rgba(0,0,0,.5)}
+.cci{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(245,166,35,.1),rgba(232,136,26,.05));font-size:120px;position:relative;overflow:hidden}
+.cci::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 0%,transparent 40%)}
+.ccb{padding:24px}
+.cc-n{font-family:var(--fd);font-size:26px;font-weight:700;color:var(--cream)}
+.cc-s{font-size:12px;color:var(--orange);font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.cc-d{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px}
+.cfacts{display:flex;flex-wrap:wrap;gap:8px}
+.cfact{font-size:11px;padding:4px 10px;border-radius:99px;background:rgba(245,166,35,.08);color:var(--orange3);border:1px solid rgba(245,166,35,.15)}
+
+/* ===== GALLERY ===== */
+#gallery{padding:120px 0;background:var(--bg2)}
+.gghdr{text-align:center;margin-bottom:48px}
+.ggrid{columns:4;column-gap:16px}
+.gi{break-inside:avoid;margin-bottom:16px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);position:relative;transition:all .3s}
+.gi:hover{transform:scale(1.02);border-color:rgba(245,166,35,.4);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.gi-inner{display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:60px;padding:28px}
+.gi-inner.tall{padding:52px}
+.gi-inner.xl{padding:36px;font-size:80px}
+.gov{position:absolute;inset:0;background:rgba(13,11,8,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .3s}
+.gi:hover .gov{opacity:1}
+.gov-txt{font-size:13px;color:var(--cream);font-weight:500}
+.gov-icon{font-size:28px}
+.gcta{text-align:center;margin-top:40px}
+.igbtn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e1306c,#833ab4,#fd1d1d);color:#fff;border:none;padding:14px 28px;border-radius:99px;font-size:14px;font-weight:600;transition:all .3s}
+.igbtn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(131,58,180,.4)}
+
+/* ===== EVENTS ===== */
+#events{padding:120px 0}
+.evhdr{text-align:center;margin-bottom:64px}
+.evgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+.evc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:32px;transition:all .3s;position:relative;overflow:hidden}
+.evc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 100% 100%,rgba(245,166,35,.08),transparent 70%);pointer-events:none}
+.evc:hover{border-color:rgba(245,166,35,.3);transform:translateY(-6px);box-shadow:var(--shadow)}
+.ev-icon{font-size:48px;margin-bottom:20px}
+.ev-t{font-family:var(--fd);font-size:20px;font-weight:700;color:var(--cream);margin-bottom:8px}
+.ev-d{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* ===== REVIEWS ===== */
+#reviews{padding:120px 0;background:var(--bg2)}
+.rvhdr{text-align:center;margin-bottom:64px}
+.rvsl{position:relative;overflow:hidden}
+.rvsl::before,.rvsl::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+.rvsl::before{left:0;background:linear-gradient(90deg,var(--bg2),transparent)}
+.rvsl::after{right:0;background:linear-gradient(-90deg,var(--bg2),transparent)}
+.rvtr{display:flex;gap:24px;animation:rscroll 28s linear infinite;width:max-content}
+.rvtr:hover{animation-play-state:paused}
+@keyframes rscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rvc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:28px;width:340px;flex-shrink:0}
+.rvs{color:var(--orange);font-size:16px;margin-bottom:14px}
+.rvtxt{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:16px;font-style:italic}
+.rva{display:flex;align-items:center;gap:12px}
+.rvav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--orange2),var(--orange3));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.rv-n{font-weight:600;font-size:14px;color:var(--cream)}
+.rv-p{font-size:11px;color:var(--text3)}
+
+/* ===== LOCATION ===== */
+#location{padding:120px 0}
+.lgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.linfo{display:flex;flex-direction:column;gap:20px}
+.ib{display:flex;gap:20px;align-items:flex-start;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);transition:all .3s}
+.ib:hover{border-color:rgba(245,166,35,.3)}
+.ib-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.ib-l{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.ib-v{font-size:15px;color:var(--cream);line-height:1.6}
+.mapw{border-radius:var(--r2);overflow:hidden;border:1px solid var(--border);height:450px;position:relative}
+.mapw iframe{width:100%;height:100%;border:0}
+
+/* ===== RESERVATION ===== */
+#reservation{padding:120px 0;background:var(--bg2)}
+.resgrid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.fg{display:flex;flex-direction:column;gap:8px}
+.fg.full{grid-column:1/-1}
+.fl{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text2)}
+.fi2{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;color:var(--cream);font-family:var(--fs);font-size:14px;outline:none;transition:all .3s;width:100%}
+.fi2:focus{border-color:var(--orange);background:var(--surface2);box-shadow:0 0 0 4px rgba(245,166,35,.08)}
+.fi2::placeholder{color:var(--text3)}
+select.fi2 option{background:var(--bg2);color:var(--cream)}
+.fsub{width:100%;padding:16px;border-radius:99px;background:var(--orange);color:var(--bg);border:none;font-size:15px;font-weight:700;letter-spacing:.05em;transition:all .3s;margin-top:8px}
+.fsub:hover{background:var(--orange3);transform:translateY(-2px);box-shadow:0 8px 30px var(--glow)}
+.fnote{font-size:12px;color:var(--text3);text-align:center;margin-top:12px}
+.resdeco{display:flex;flex-direction:column;gap:24px}
+.rdcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:32px;text-align:center}
+.rde{font-size:56px;margin-bottom:16px}
+.rdt{font-family:var(--fd);font-size:22px;color:var(--cream);margin-bottom:8px}
+.rdd{font-size:14px;color:var(--text2);line-height:1.7}
+
+/* ===== MERCH ===== */
+#merch{padding:80px 0}
+.mbn{background:linear-gradient(135deg,rgba(245,166,35,.12),rgba(232,136,26,.06));border:1px solid var(--border);border-radius:var(--r2);padding:60px;text-align:center;position:relative;overflow:hidden}
+.mbn::before{content:'🐾';font-size:300px;opacity:.05;position:absolute;right:-60px;bottom:-60px;line-height:1;pointer-events:none}
+.mbt{font-family:var(--fd);font-size:clamp(28px,4vw,52px);font-weight:700;color:var(--cream);margin-bottom:12px}
+.mbs{font-size:16px;color:var(--text2);margin-bottom:32px}
+
+/* ===== FOOTER ===== */
+footer{padding:60px 0 32px;border-top:1px solid var(--border)}
+.fgr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.flogo{font-family:var(--fc);font-size:28px;color:var(--orange3);margin-bottom:12px}
+.ftag{font-size:13px;color:var(--text2);line-height:1.7;max-width:260px}
+.fsoc{display:flex;gap:12px;margin-top:20px}
+.sb{width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .3s}
+.sb:hover{background:var(--orange);border-color:var(--orange);transform:translateY(-2px)}
+.fcol h4{font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fcol ul li{font-size:14px;color:var(--text2)}
+.fcol ul li a{color:var(--text2);transition:color .2s}
+.fcol ul li a:hover{color:var(--cream)}
+.fbot{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.fcp{font-size:12px;color:var(--text3)}
+.flang{display:flex;align-items:center;gap:4px}
+.flang button{background:none;border:none;font-size:12px;color:var(--text3);transition:color .2s;padding:2px 6px}
+.flang button.act{color:var(--orange);font-weight:600}
+.flang span{color:var(--text3)}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:32px;right:32px;z-index:10000;background:var(--orange);color:var(--bg);padding:16px 24px;border-radius:var(--r);font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.23,1,.32,1);box-shadow:0 8px 30px var(--glow)}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ===== FLOATING PAWS DECO ===== */
+.fpaw{position:fixed;font-size:22px;opacity:.04;pointer-events:none;z-index:0;animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(100vh) rotate(0deg)}to{transform:translateY(-120px) rotate(360deg)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .agrid{grid-template-columns:1fr;gap:40px}
+  .aim{display:none}
+  .lgrid{grid-template-columns:1fr}
+  .resgrid{grid-template-columns:1fr}
+  .fgr{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nlinks,.ncta{display:none}
+  .hbg{display:flex}
+  .hcorgi{display:none}
+  .hstats{gap:24px}
+  .ggrid{columns:2}
+  .fgrid{grid-template-columns:1fr}
+  .fgr{grid-template-columns:1fr;gap:32px}
+  .fbot{flex-direction:column;text-align:center}
+  .mbn{padding:40px 24px}
+}
+@media(max-width:480px){
+  .hact{flex-direction:column}
+  .btn-p,.btn-s{width:100%;justify-content:center}
+  .mtabs{gap:6px}
+  .mtab{padding:8px 14px;font-size:12px}
+  .ggrid{columns:1}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ===== FLOATING PAW DECORATIONS ===== -->
+<div class="fpaw" style="left:5%;animation-duration:18s;animation-delay:-4s">🐾</div>
+<div class="fpaw" style="left:25%;animation-duration:22s;animation-delay:-9s">🐾</div>
+<div class="fpaw" style="left:50%;animation-duration:15s;animation-delay:-2s">🐾</div>
+<div class="fpaw" style="left:75%;animation-duration:20s;animation-delay:-12s">🐾</div>
+<div class="fpaw" style="left:90%;animation-duration:17s;animation-delay:-6s">🐾</div>
+
+<!-- ===== LOADER ===== -->
+<div id="loader">
+  <div class="lname">Corgi's Cafe</div>
+  <div class="lc">🐕</div>
+  <div class="lbw"><div class="lbar" id="lbar"></div></div>
+  <div class="ltxt" id="ltxt">Зареждане...</div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast">🐾 <span id="toast-msg">Резервацията е изпратена!</span></div>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <div class="container">
+    <div class="ni">
+      <a href="#hero" class="nlogo">🐕 Corgi's Cafe</a>
+      <ul class="nlinks">
+        <li><a href="#about"   data-bg="За нас"      data-en="About">За нас</a></li>
+        <li><a href="#menu"    data-bg="Меню"         data-en="Menu">Меню</a></li>
+        <li><a href="#corgis"  data-bg="Корги"        data-en="Corgis">Корги</a></li>
+        <li><a href="#events"  data-bg="Събития"      data-en="Events">Събития</a></li>
+        <li><a href="#reviews" data-bg="Отзиви"       data-en="Reviews">Отзиви</a></li>
+        <li><a href="#location" data-bg="Локация"     data-en="Location">Локация</a></li>
+      </ul>
+      <div class="nr">
+        <div class="lsw">
+          <button class="lb2 act" onclick="setLang('bg')">BG</button>
+          <button class="lb2" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="ncta" onclick="scrollTo('#reservation')" data-bg="Резервирай" data-en="Book a Table">Резервирай</button>
+        <button class="hbg" id="hbg" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mmenu" id="mmenu">
+  <a href="#about"    onclick="toggleMenu()" data-bg="За нас"   data-en="About">За нас</a>
+  <a href="#menu"     onclick="toggleMenu()" data-bg="Меню"     data-en="Menu">Меню</a>
+  <a href="#corgis"   onclick="toggleMenu()" data-bg="Корги"    data-en="Corgis">Корги</a>
+  <a href="#events"   onclick="toggleMenu()" data-bg="Събития"  data-en="Events">Събития</a>
+  <a href="#reviews"  onclick="toggleMenu()" data-bg="Отзиви"   data-en="Reviews">Отзиви</a>
+  <a href="#location" onclick="toggleMenu()" data-bg="Локация"  data-en="Location">Локация</a>
+  <a href="#reservation" onclick="toggleMenu()" data-bg="Резервирай" data-en="Book a Table">Резервирай</a>
+  <div class="mlang">
+    <button class="act" onclick="setLang('bg');toggleMenu()">BG</button>
+    <button onclick="setLang('en');toggleMenu()">EN</button>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hbg2"></div>
+  <div class="container">
+    <div class="hcont">
+      <div class="htag reveal">
+        <span class="hdot"></span>
+        <span data-bg="🐾 Единственото корги кафе в България" data-en="🐾 The only corgi café in Bulgaria">🐾 Единственото корги кафе в България</span>
+      </div>
+      <h1 class="hh1 reveal" style="transition-delay:.1s">
+        <span data-bg="Най-сладкото" data-en="The Sweetest">Най-сладкото</span><br>
+        <em data-bg="Корги Кафе" data-en="Corgi Café">Корги Кафе</em><br>
+        <span data-bg="в София" data-en="in Sofia">в София</span>
+      </h1>
+      <p class="hh2 reveal" style="transition-delay:.2s" data-bg="Храна · Напитки · Корги" data-en="Food · Drinks · Corgis">Храна · Напитки · Корги</p>
+      <p class="hdesc reveal" style="transition-delay:.25s" data-bg="Вкусна веган храна, ароматни напитки от специално кафе Richard и неустоими корги кученца. Ела при нас и забрави за стреса!" data-en="Delicious vegan food, aromatic specialty coffee by Richard, and irresistible corgi dogs. Come visit us and forget about stress!">Вкусна веган храна, ароматни напитки от специално кафе Richard и неустоими корги кученца. Ела при нас и забрави за стреса!</p>
+      <div class="hact reveal" style="transition-delay:.3s">
+        <button class="btn-p" onclick="scrollTo('#menu')" data-bg="🍽 Виж менюто" data-en="🍽 See Menu">🍽 Виж менюто</button>
+        <button class="btn-s" onclick="scrollTo('#reservation')" data-bg="📅 Резервирай маса" data-en="📅 Book a Table">📅 Резервирай маса</button>
+      </div>
+      <div class="hstats reveal" style="transition-delay:.4s">
+        <div><div class="stat-n">4.6★</div><div class="stat-l" data-bg="Среден рейтинг" data-en="Avg Rating">Среден рейтинг</div></div>
+        <div><div class="stat-n">2+</div><div class="stat-l" data-bg="Корги на живо" data-en="Live Corgis">Корги на живо</div></div>
+        <div><div class="stat-n">100%</div><div class="stat-l" data-bg="Веган меню" data-en="Vegan Menu">Веган меню</div></div>
+        <div><div class="stat-n">2023</div><div class="stat-l" data-bg="Основано" data-en="Founded">Основано</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hcorgi">🐕</div>
+  <div class="scroll-h">
+    <span data-bg="Превърти надолу" data-en="Scroll down">Превърти надолу</span>
+    <div class="sarrow"></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="sep"></div>
+  <div class="container" style="margin-top:80px">
+    <div class="agrid">
+      <div class="aim reveal">
+        <div class="aim-inner">🐕</div>
+        <div class="aim-badge">
+          <div class="big">МАЙ 2023</div>
+          <div class="sm" data-bg="Отворихме врати" data-en="We opened our doors">Отворихме врати</div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.15s">
+        <div class="stag" data-bg="Нашата история" data-en="Our Story">Нашата история</div>
+        <h2 class="stitle"><span data-bg="Как започна" data-en="How it all">Как започна</span><br><span data-bg="всичко" data-en="began">всичко</span></h2>
+        <p class="ssub" data-bg="Idеята ни за Корги кафето е съвсем естествено продължение на желанието ни да има все повече места, където домашните любимци са добре дошли. Кафето е и централа на националния породен клуб 'Клуб Уелско Корги България'." data-en="Our idea for the Corgi Café is a natural extension of our desire to create more places where pets are welcome. The café is also the headquarters of the national breed club 'Welsh Corgi Club Bulgaria'.">Idеята ни за Корги кафето е съвсем естествено продължение на желанието ни да има все повече места, където домашните любимци са добре дошли. Кафето е и централа на националния породен клуб „Клуб Уелско Корги България".</p>
+        <div class="afeats">
+          <div class="fi">
+            <div class="fi-icon">🐕</div>
+            <div>
+              <div class="fi-t" data-bg="Щури коргита" data-en="Adorable Corgis">Щури коргита</div>
+              <div class="fi-d" data-bg="Две пухести кученца ви очакват! Гушкането на куче намалява стреса и ни прави по-добри хора." data-en="Two fluffy pups are waiting for you! Cuddling a dog reduces stress and makes us better people.">Две пухести кученца ви очакват! Гушкането на куче намалява стреса и ни прави по-добри хора.</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fi-icon">🥦</div>
+            <div>
+              <div class="fi-t" data-bg="100% Веган меню" data-en="100% Vegan Menu">100% Веган меню</div>
+              <div class="fi-d" data-bg="Ние сме веган и вегетарианско заведение. Обичаме животните и го показваме в чинията!" data-en="We are a vegan and vegetarian establishment. We love animals and show it on the plate!">Ние сме веган и вегетарианско заведение. Обичаме животните и го показваме в чинията!</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fi-icon">☕</div>
+            <div>
+              <div class="fi-t" data-bg="Специално кафе Richard" data-en="Richard Specialty Coffee">Специално кафе Richard</div>
+              <div class="fi-d" data-bg="Предлагаме едно от най-добрите кафета на пазара. Опитайте и нашето Mushpresso с гъби!" data-en="We serve one of the best coffees on the market. Try our Mushpresso with mushrooms too!">Предлагаме едно от най-добрите кафета на пазара. Опитайте и нашето Mushpresso с гъби!</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fi-icon">🎉</div>
+            <div>
+              <div class="fi-t" data-bg="Забавни събития" data-en="Fun Events">Забавни събития</div>
+              <div class="fi-d" data-bg="Йога с корги, рисуване с кучета, рождени дни и тиймбилдинг – ежемесечно организираме нещо страхотно." data-en="Corgi yoga, painting with dogs, birthdays and team building – we organize something amazing every month.">Йога с корги, рисуване с кучета, рождени дни и тиймбилдинг – ежемесечно организираме нещо страхотно.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section id="menu">
+  <div class="container">
+    <div class="mhdr reveal">
+      <div class="stag" data-bg="Нашето меню" data-en="Our Menu">Нашето меню</div>
+      <h2 class="stitle"><span data-bg="Вкусни" data-en="Delicious">Вкусни</span> <span data-bg="предложения" data-en="offerings">предложения</span></h2>
+      <p class="ssub" style="margin:12px auto 0" data-bg="Всичко е веган, приготвено с любов. Цените са в евро." data-en="Everything is vegan, made with love. Prices are in euros.">Всичко е веган, приготвено с любов. Цените са в евро.</p>
+    </div>
+    <div class="mtabs reveal" style="transition-delay:.1s">
+      <button class="mtab act" onclick="switchTab(this,'tab-main')"   data-bg="🍔 Основни" data-en="🍔 Mains">🍔 Основни</button>
+      <button class="mtab"     onclick="switchTab(this,'tab-sand')"   data-bg="🥪 Сандвичи" data-en="🥪 Sandwiches">🥪 Сандвичи</button>
+      <button class="mtab"     onclick="switchTab(this,'tab-pizza')"  data-bg="🍕 Пица" data-en="🍕 Pizza">🍕 Пица</button>
+      <button class="mtab"     onclick="switchTab(this,'tab-salads')" data-bg="🥗 Салати" data-en="🥗 Salads">🥗 Салати</button>
+      <button class="mtab"     onclick="switchTab(this,'tab-dessert')" data-bg="🍰 Десерти" data-en="🍰 Desserts">🍰 Десерти</button>
+      <button class="mtab"     onclick="switchTab(this,'tab-drinks')" data-bg="☕ Напитки" data-en="☕ Drinks">☕ Напитки</button>
+    </div>
+
+    <!-- MAIN -->
+    <div id="tab-main" class="mpanel act">
+      <div class="mgrid">
+        <div class="mc"><div class="mc-em">🍔</div><div class="mc-n" data-bg="Корги Бургер" data-en="Corgi Burger">Корги Бургер</div><div class="mc-d" data-bg="Веган бургер с хрупкаво корниш пиле, айоли, маруля и домат. Сервира се с хрупкави картофки." data-en="Vegan burger with crispy cornish chicken, aioli, lettuce and tomato. Served with crispy fries.">Веган бургер с хрупкаво корниш пиле, айоли, маруля и домат. Сервира се с хрупкави картофки.</div><div class="mc-f"><span class="mc-p">€12.90</span><span class="mc-tag" data-bg="Хит" data-en="Best Seller">Хит</span></div></div>
+        <div class="mc"><div class="mc-em">🥞</div><div class="mc-n" data-bg="Американски Панкейки" data-en="American Pancakes">Американски Панкейки</div><div class="mc-d" data-bg="Пухкави веган панкейки с кленов сироп, пресни горски плодове и веган масло." data-en="Fluffy vegan pancakes with maple syrup, fresh berries and vegan butter.">Пухкави веган панкейки с кленов сироп, пресни горски плодове и веган масло.</div><div class="mc-f"><span class="mc-p">€9.90</span><span class="mc-tag" data-bg="Бранч" data-en="Brunch">Бранч</span></div></div>
+        <div class="mc"><div class="mc-em">🫔</div><div class="mc-n" data-bg="Тортила Natural Bobtail" data-en="Natural Bobtail Tortilla">Тортила Natural Bobtail</div><div class="mc-d" data-bg="Пълнозърнеста тортила с печени зеленчуци, хумус, спанак и авокадо крем." data-en="Wholegrain tortilla with roasted vegetables, hummus, spinach and avocado cream.">Пълнозърнеста тортила с печени зеленчуци, хумус, спанак и авокадо крем.</div><div class="mc-f"><span class="mc-p">€11.90</span><span class="mc-tag" data-bg="Веган" data-en="Vegan">Веган</span></div></div>
+        <div class="mc"><div class="mc-em">🫓</div><div class="mc-n" data-bg="Кесадия с Гъби" data-en="Mushroom Quesadilla">Кесадия с Гъби</div><div class="mc-d" data-bg="Хрупкава кесадия с карамелизирани гъби, веган сирене и домашна салса." data-en="Crispy quesadilla with caramelised mushrooms, vegan cheese and homemade salsa.">Хрупкава кесадия с карамелизирани гъби, веган сирене и домашна салса.</div><div class="mc-f"><span class="mc-p">€10.50</span><span class="mc-tag" data-bg="Нов" data-en="New">Нов</span></div></div>
+      </div>
+    </div>
+
+    <!-- SANDWICHES -->
+    <div id="tab-sand" class="mpanel">
+      <div class="mgrid">
+        <div class="mc"><div class="mc-em">🥪</div><div class="mc-n" data-bg="Корги Клуб Сандвич" data-en="Corgi Club Sandwich">Корги Клуб Сандвич</div><div class="mc-d" data-bg="Тостван сандвич с веган пилешко, авокадо, маруля, домат и айоли сос." data-en="Toasted sandwich with vegan chicken, avocado, lettuce, tomato and aioli sauce.">Тостван сандвич с веган пилешко, авокадо, маруля, домат и айоли сос.</div><div class="mc-f"><span class="mc-p">€10.90</span><span class="mc-tag" data-bg="Хит" data-en="Best Seller">Хит</span></div></div>
+        <div class="mc"><div class="mc-em">🥑</div><div class="mc-n" data-bg="Авокадо Тост" data-en="Avocado Toast">Авокадо Тост</div><div class="mc-d" data-bg="Закваска с кремообразно авокадо, чери домати, микрозеленини и лимонова заправка." data-en="Sourdough with creamy avocado, cherry tomatoes, microgreens and lemon dressing.">Закваска с кремообразно авокадо, чери домати, микрозеленини и лимонова заправка.</div><div class="mc-f"><span class="mc-p">€8.90</span><span class="mc-tag" data-bg="Бранч" data-en="Brunch">Бранч</span></div></div>
+        <div class="mc"><div class="mc-em">🍞</div><div class="mc-n" data-bg="Корги Крекер" data-en="Corgi Cracker">Корги Крекер</div><div class="mc-d" data-bg="Домашен хрупкав крекер с хумус и зеленчуков дип. Перфектна лека закуска." data-en="Homemade crispy cracker with hummus and vegetable dip. Perfect light snack.">Домашен хрупкав крекер с хумус и зеленчуков дип. Перфектна лека закуска.</div><div class="mc-f"><span class="mc-p">€2.00</span><span class="mc-tag" data-bg="Снак" data-en="Snack">Снак</span></div></div>
+      </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div id="tab-pizza" class="mpanel">
+      <div class="mgrid">
+        <div class="mc"><div class="mc-em">🍕</div><div class="mc-n" data-bg="Пица Маргарита Веган" data-en="Vegan Margherita Pizza">Пица Маргарита Веган</div><div class="mc-d" data-bg="Тънко тесто, доматен сос, веган моцарела, пресен босилек и зехтин." data-en="Thin crust, tomato sauce, vegan mozzarella, fresh basil and olive oil.">Тънко тесто, доматен сос, веган моцарела, пресен босилек и зехтин.</div><div class="mc-f"><span class="mc-p">€11.50</span><span class="mc-tag" data-bg="Веган" data-en="Vegan">Веган</span></div></div>
+        <div class="mc"><div class="mc-em">🍕</div><div class="mc-n" data-bg="Пица с Веган Салами" data-en="Vegan Salami Pizza">Пица с Веган Салами</div><div class="mc-d" data-bg="Доматен сос, веган салами, маслини, червен лук и веган сирене." data-en="Tomato sauce, vegan salami, olives, red onion and vegan cheese.">Доматен сос, веган салами, маслини, червен лук и веган сирене.</div><div class="mc-f"><span class="mc-p">€13.50</span><span class="mc-tag" data-bg="Хит" data-en="Best Seller">Хит</span></div></div>
+        <div class="mc"><div class="mc-em">🍕</div><div class="mc-n" data-bg="Пица с Гъби и Трюфел" data-en="Mushroom & Truffle Pizza">Пица с Гъби и Трюфел</div><div class="mc-d" data-bg="Крем от трюфел, асорти гъби, рукола и веган пармезан." data-en="Truffle cream, assorted mushrooms, rocket and vegan parmesan.">Крем от трюфел, асорти гъби, рукола и веган пармезан.</div><div class="mc-f"><span class="mc-p">€14.90</span><span class="mc-tag" data-bg="Премиум" data-en="Premium">Премиум</span></div></div>
+      </div>
+    </div>
+
+    <!-- SALADS -->
+    <div id="tab-salads" class="mpanel">
+      <div class="mgrid">
+        <div class="mc"><div class="mc-em">🥗</div><div class="mc-n" data-bg="Корги Салата" data-en="Corgi Salad">Корги Салата</div><div class="mc-d" data-bg="Свежа салата с рукола, чери домати, краставица, тиква и лимонов дресинг." data-en="Fresh salad with rocket, cherry tomatoes, cucumber, pumpkin and lemon dressing.">Свежа салата с рукола, чери домати, краставица, тиква и лимонов дресинг.</div><div class="mc-f"><span class="mc-p">€8.50</span><span class="mc-tag" data-bg="Леко" data-en="Light">Леко</span></div></div>
+        <div class="mc"><div class="mc-em">🥗</div><div class="mc-n" data-bg="Веган Цезар" data-en="Vegan Caesar">Веган Цезар</div><div class="mc-d" data-bg="Маруля романо, крутони, веган пармезан, каперси и кремообразен веган Цезар сос." data-en="Romaine lettuce, croutons, vegan parmesan, capers and creamy vegan Caesar dressing.">Маруля романо, крутони, веган пармезан, каперси и кремообразен веган Цезар сос.</div><div class="mc-f"><span class="mc-p">€9.50</span><span class="mc-tag" data-bg="Хит" data-en="Best Seller">Хит</span></div></div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div id="tab-dessert" class="mpanel">
+      <div class="mgrid">
+        <div class="mc"><div class="mc-em">🍮</div><div class="mc-n" data-bg="Корги Пудинг" data-en="Corgi Pudding">Корги Пудинг</div><div class="mc-d" data-bg="Кремообразен шоколадов веган пудинг с манго желе и кокосов крем." data-en="Creamy chocolate vegan pudding with mango jelly and coconut cream.">Кремообразен шоколадов веган пудинг с манго желе и кокосов крем.</div><div class="mc-f"><span class="mc-p">€5.90</span><span class="mc-tag" data-bg="Хит" data-en="Best Seller">Хит</span></div></div>
+        <div class="mc"><div class="mc-em">🍰</div><div class="mc-n" data-bg="Тиквена Торта" data-en="Pumpkin Cake">Тиквена Торта</div><div class="mc-d" data-bg="Влажна тиквена торта с канелена глазура и орехи. Сезонна специалност." data-en="Moist pumpkin cake with cinnamon glaze and walnuts. Seasonal specialty.">Влажна тиквена торта с канелена глазура и орехи. Сезонна специалност.</div><div class="mc-f"><span class="mc-p">€5.50</span><span class="mc-tag" data-bg="Сезонен" data-en="Seasonal">Сезонен</span></div></div>
+        <div class="mc"><div class="mc-em">🍪</div><div class="mc-n" data-bg="Домашни Бисквити" data-en="Homemade Cookies">Домашни Бисквити</div><div class="mc-d" data-bg="Веган бисквити с форма на корги, ръчно украсени с веган глазура." data-en="Vegan cookies in corgi shapes, hand-decorated with vegan icing.">Веган бисквити с форма на корги, ръчно украсени с веган глазура.</div><div class="mc-f"><span class="mc-p">€2.50</span><span class="mc-tag" data-bg="Сладко" data-en="Sweet">Сладко</span></div></div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div id="tab-drinks" class="mpanel">
+      <div class="mgrid">
+        <div class="mc"><div class="mc-em">☕</div><div class="mc-n" data-bg="Кафе Richard Еспресо" data-en="Richard Espresso">Кафе Richard Еспресо</div><div class="mc-d" data-bg="Единично или двойно еспресо от световноизвестното кафе Richard. Интензивен вкус." data-en="Single or double espresso from the world-renowned Richard coffee. Intense flavour.">Единично или двойно еспресо от световноизвестното кафе Richard. Интензивен вкус.</div><div class="mc-f"><span class="mc-p">€2.50</span><span class="mc-tag" data-bg="Кафе" data-en="Coffee">Кафе</span></div></div>
+        <div class="mc"><div class="mc-em">🍄</div><div class="mc-n" data-bg="Mushpresso" data-en="Mushpresso">Mushpresso</div><div class="mc-d" data-bg="Нашата уникална напитка с гъби, еспресо и растително мляко. Нестандартно и вкусно!" data-en="Our unique mushroom, espresso and plant milk drink. Unconventional and delicious!">Нашата уникална напитка с гъби, еспресо и растително мляко. Нестандартно и вкусно!</div><div class="mc-f"><span class="mc-p">€4.50</span><span class="mc-tag" data-bg="Уникален" data-en="Unique">Уникален</span></div></div>
+        <div class="mc"><div class="mc-em">🎃</div><div class="mc-n" data-bg="Тиквено Лате" data-en="Pumpkin Latte">Тиквено Лате</div><div class="mc-d" data-bg="Кремообразно лате с тиквен сироп, канела и разпенено растително мляко." data-en="Creamy latte with pumpkin syrup, cinnamon and frothed plant milk.">Кремообразно лате с тиквен сироп, канела и разпенено растително мляко.</div><div class="mc-f"><span class="mc-p">€4.00</span><span class="mc-tag" data-bg="Хит" data-en="Best Seller">Хит</span></div></div>
+        <div class="mc"><div class="mc-em">🥭</div><div class="mc-n" data-bg="Манго-Джинджифилов Сок" data-en="Mango Ginger Juice">Манго-Джинджифилов Сок</div><div class="mc-d" data-bg="Освежаващ студен сок от манго и джинджифил по оригинална рецепта на заведението." data-en="Refreshing cold juice of mango and ginger by our original recipe.">Освежаващ студен сок от манго и джинджифил по оригинална рецепта на заведението.</div><div class="mc-f"><span class="mc-p">€4.50</span><span class="mc-tag" data-bg="Оригинален" data-en="Original">Оригинален</span></div></div>
+        <div class="mc"><div class="mc-em">🍵</div><div class="mc-n" data-bg="Айрян" data-en="Ayran">Айрян</div><div class="mc-d" data-bg="Традиционен студен айрян. Перфектно освежаване за горещите дни." data-en="Traditional cold ayran. Perfect refreshment for hot days.">Традиционен студен айрян. Перфектно освежаване за горещите дни.</div><div class="mc-f"><span class="mc-p">€2.80</span><span class="mc-tag" data-bg="Традиционен" data-en="Traditional">Традиционен</span></div></div>
+        <div class="mc"><div class="mc-em">🍹</div><div class="mc-n" data-bg="Сезонна Лимонада" data-en="Seasonal Lemonade">Сезонна Лимонада</div><div class="mc-d" data-bg="Домашна лимонада по сезонна рецепта с пресни плодове и билки." data-en="Homemade lemonade with seasonal recipe, fresh fruits and herbs.">Домашна лимонада по сезонна рецепта с пресни плодове и билки.</div><div class="mc-f"><span class="mc-p">€3.80</span><span class="mc-tag" data-bg="Освежаващ" data-en="Refreshing">Освежаващ</span></div></div>
+      </div>
+    </div>
+
+    <div class="mcta reveal">
+      <a href="https://drive.google.com/file/d/1O8KFXH1Mq63lyMhlGnFnrinU411N9L-t/view" target="_blank" class="btn-p" data-bg="📄 Пълно меню (PDF)" data-en="📄 Full Menu (PDF)">📄 Пълно меню (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEET THE CORGIS ===== -->
+<section id="corgis">
+  <div class="container">
+    <div class="corgis-header reveal">
+      <div class="stag" data-bg="Нашите корги" data-en="Our Corgis">Нашите корги</div>
+      <h2 class="stitle" data-bg="Запознайте се с<br><span>пухкавите домакини</span>" data-en="Meet the<br><span>fluffy hosts</span>">Запознайте се с<br><span>пухкавите домакини</span></h2>
+      <p class="ssub" style="margin:12px auto 0" data-bg="Те са причината да се усмихвате – два неустоими корги, които нямат търпение да ви видят!" data-en="They are the reason you'll smile – two irresistible corgis who can't wait to meet you!">Те са причината да се усмихвате – два неустоими корги, които нямат търпение да ви видят!</p>
+    </div>
+    <div class="cgrid">
+      <div class="ccard reveal">
+        <div class="cci">🐕</div>
+        <div class="ccb">
+          <div class="cc-n">Siri</div>
+          <div class="cc-s" data-bg="Главен домакин · Корги" data-en="Head Host · Corgi">Главен домакин · Корги</div>
+          <div class="cc-d" data-bg="Сири е истинска звезда! Обожава да посреща гостите с мокри целувки и очаква само едно нещо – любов и внимание. Тя е сърцето на кафето." data-en="Siri is a real star! She loves greeting guests with wet kisses and expects only one thing – love and attention. She is the heart of the café.">Сири е истинска звезда! Обожава да посреща гостите с мокри целувки и очаква само едно нещо – любов и внимание. Тя е сърцето на кафето.</div>
+          <div class="cfacts">
+            <span class="cfact" data-bg="Обича прегръдки" data-en="Loves cuddles">Обича прегръдки</span>
+            <span class="cfact" data-bg="Уелско корги" data-en="Welsh Corgi">Уелско корги</span>
+            <span class="cfact" data-bg="Много шумна" data-en="Very vocal">Много шумна</span>
+          </div>
+        </div>
+      </div>
+      <div class="ccard reveal" style="transition-delay:.15s">
+        <div class="cci">🐶</div>
+        <div class="ccb">
+          <div class="cc-n" data-bg="Корги #2" data-en="Corgi #2">Корги #2</div>
+          <div class="cc-s" data-bg="Заместник домакин · Корги" data-en="Deputy Host · Corgi">Заместник домакин · Корги</div>
+          <div class="cc-d" data-bg="Второто ни пухче е малко по-срамежливо, но пък много игриво! След малко гощаване от ваша страна ще стане ваш най-добър приятел за деня." data-en="Our second fluffball is a bit shyer, but very playful! After a little treat from you, they will become your best friend for the day.">Второто ни пухче е малко по-срамежливо, но пък много игриво! След малко гощаване от ваша страна ще стане ваш най-добър приятел за деня.</div>
+          <div class="cfacts">
+            <span class="cfact" data-bg="Игривост 100%" data-en="Playfulness 100%">Игривост 100%</span>
+            <span class="cfact" data-bg="Обожава играчки" data-en="Loves toys">Обожава играчки</span>
+            <span class="cfact" data-bg="Пухкав" data-en="Fluffy">Пухкав</span>
+          </div>
+        </div>
+      </div>
+      <div class="ccard reveal" style="transition-delay:.3s">
+        <div class="cci" style="font-size:90px">🐾❤️🐾</div>
+        <div class="ccb">
+          <div class="cc-n" data-bg="Клуб Уелско Корги" data-en="Welsh Corgi Club">Клуб Уелско Корги</div>
+          <div class="cc-s" data-bg="Националeн породен клуб · България" data-en="National Breed Club · Bulgaria">Националeн породен клуб · България</div>
+          <div class="cc-d" data-bg="Кафето е и централа на 'Клуб Уелско Корги България'. Години работа с породата и мечтата за собствено заведение се обединиха под покрива на Corgi's Cafe." data-en="The café is also the headquarters of 'Welsh Corgi Club Bulgaria'. Years of working with the breed and the dream of owning a restaurant united under the roof of Corgi's Cafe.">Кафето е и централа на „Клуб Уелско Корги България". Години работа с породата и мечтата за собствено заведение се обединиха под покрива на Corgi's Cafe.</div>
+          <div class="cfacts">
+            <span class="cfact" data-bg="Основан 2023" data-en="Est. 2023">Основан 2023</span>
+            <span class="cfact" data-bg="Национален клуб" data-en="National Club">Национален клуб</span>
+            <span class="cfact" data-bg="Любов към породата" data-en="Breed passion">Любов към породата</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- RULES notice -->
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="https://drive.google.com/file/d/1pTnZGaMXSFaQOxLJY_BLtoufYJ7ZDxSV/view" target="_blank" class="btn-s" data-bg="📋 Правила за посетители" data-en="📋 Visitor Rules">📋 Правила за посетители</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTAGRAM GALLERY ===== -->
+<section id="gallery">
+  <div class="container">
+    <div class="gghdr reveal">
+      <div class="stag" data-bg="Галерия" data-en="Gallery">Галерия</div>
+      <h2 class="stitle"><span data-bg="Нашият свят" data-en="Our">Нашият свят</span> <span data-bg="в снимки" data-en="world in pictures">в снимки</span></h2>
+      <p class="ssub" style="margin:12px auto 0" data-bg="Следвайте ни в Instagram @corgis_cafe за ежедневни порции корги и вкусна храна!" data-en="Follow us on Instagram @corgis_cafe for daily doses of corgis and delicious food!">Следвайте ни в Instagram @corgis_cafe за ежедневни порции корги и вкусна храна!</p>
+    </div>
+    <div class="ggrid reveal" style="transition-delay:.1s">
+      <div class="gi"><div class="gi-inner">🐕</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner tall">🍔</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner">🐶</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner xl">☕</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner tall">🥗</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner">🐕‍🦺</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner">🍕</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner xl">🐾</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner tall">🥞</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner">🍰</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner">🐕</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+      <div class="gi"><div class="gi-inner xl">🎉</div><div class="gov"><div class="gov-icon">📸</div><div class="gov-txt">@corgis_cafe</div></div></div>
+    </div>
+    <div class="gcta reveal">
+      <a href="https://www.instagram.com/corgis_cafe/" target="_blank" class="igbtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
+        <span data-bg="Последвай @corgis_cafe" data-en="Follow @corgis_cafe">Последвай @corgis_cafe</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EVENTS ===== -->
+<section id="events">
+  <div class="container">
+    <div class="evhdr reveal">
+      <div class="stag" data-bg="Специални събития" data-en="Special Events">Специални събития</div>
+      <h2 class="stitle"><span data-bg="Организирай" data-en="Organise">Организирай</span> <span data-bg="своето събитие" data-en="your event">своето събитие</span></h2>
+      <p class="ssub" style="margin:12px auto 0" data-bg="Свържи се с нас за повече информация и индивидуална оферта." data-en="Contact us for more information and a custom quote.">Свържи се с нас за повече информация и индивидуална оферта.</p>
+    </div>
+    <div class="evgrid">
+      <div class="evc reveal"><div class="ev-icon">🧘</div><div class="ev-t" data-bg="Корги Йога и Бранч" data-en="Corgi Yoga & Brunch">Корги Йога и Бранч</div><div class="ev-d" data-bg="Сутрешна йога сесия с нашите корги, последвана от вкусен веган бранч." data-en="Morning yoga session with our corgis, followed by a delicious vegan brunch.">Сутрешна йога сесия с нашите корги, последвана от вкусен веган бранч.</div></div>
+      <div class="evc reveal" style="transition-delay:.08s"><div class="ev-icon">🎨</div><div class="ev-t" data-bg="Рисуване с Кучета" data-en="Painting with Dogs">Рисуване с Кучета</div><div class="ev-d" data-bg="Творчески арт работилници в компанията на нашите пухкави приятели." data-en="Creative art workshops in the company of our fluffy friends.">Творчески арт работилници в компанията на нашите пухкави приятели.</div></div>
+      <div class="evc reveal" style="transition-delay:.16s"><div class="ev-icon">🎂</div><div class="ev-t" data-bg="Рождени Дни" data-en="Birthday Parties">Рождени Дни</div><div class="ev-d" data-bg="Рождени дни за хора и кучета! Персонализирани торти и незабравими спомени." data-en="Birthdays for humans and dogs! Personalised cakes and unforgettable memories.">Рождени дни за хора и кучета! Персонализирани торти и незабравими спомени.</div></div>
+      <div class="evc reveal" style="transition-delay:.24s"><div class="ev-icon">🤝</div><div class="ev-t" data-bg="Тийм Билдинг" data-en="Team Building">Тийм Билдинг</div><div class="ev-d" data-bg="Укрепете екипния дух с помощта на най-добрите терапевти – нашите корги." data-en="Strengthen team spirit with the help of the best therapists – our corgis.">Укрепете екипния дух с помощта на най-добрите терапевти – нашите корги.</div></div>
+      <div class="evc reveal" style="transition-delay:.32s"><div class="ev-icon">🍪</div><div class="ev-t" data-bg="Печене на Бисквити" data-en="Cookie Baking">Печене на Бисквити</div><div class="ev-d" data-bg="Печете корги-формовани бисквити в компанията на истински корги. Перфектно за деца!" data-en="Bake corgi-shaped cookies in the company of real corgis. Perfect for kids!">Печете корги-формовани бисквити в компанията на истински корги. Перфектно за деца!</div></div>
+      <div class="evc reveal" style="transition-delay:.4s"><div class="ev-icon">🎭</div><div class="ev-t" data-bg="Тематични Партита" data-en="Themed Parties">Тематични Партита</div><div class="ev-d" data-bg="Хелоуин, Коледа, Великден – организираме тематични партита за всеки повод." data-en="Halloween, Christmas, Easter – we organise themed parties for every occasion.">Хелоуин, Коледа, Великден – организираме тематични партита за всеки повод.</div></div>
+    </div>
+    <div style="text-align:center;margin-top:48px" class="reveal">
+      <a href="tel:+359879592990" class="btn-p" data-bg="📞 Свържи се с нас" data-en="📞 Contact Us">📞 Свържи се с нас</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews">
+  <div class="container">
+    <div class="rvhdr reveal">
+      <div class="stag" data-bg="Отзиви" data-en="Reviews">Отзиви</div>
+      <h2 class="stitle"><span data-bg="Какво казват" data-en="What our">Какво казват</span> <span data-bg="гостите ни" data-en="guests say">гостите ни</span></h2>
+    </div>
+  </div>
+  <div class="rvsl">
+    <div class="rvtr" id="rvtr">
+      <!-- Cards duplicated for infinite loop via JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATION ===== -->
+<section id="location">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:64px" class="reveal">
+      <div class="stag" data-bg="Намерете ни" data-en="Find Us">Намерете ни</div>
+      <h2 class="stitle"><span data-bg="Ние сме в" data-en="We are in">Ние сме в</span> <span data-bg="сърцето на София" data-en="the heart of Sofia">сърцето на София</span></h2>
+    </div>
+    <div class="lgrid">
+      <div class="linfo reveal">
+        <div class="ib">
+          <div class="ib-icon">📍</div>
+          <div><div class="ib-l" data-bg="Адрес" data-en="Address">Адрес</div><div class="ib-v">ул. Христо Белчев 8а<br>1000 София, България</div></div>
+        </div>
+        <div class="ib">
+          <div class="ib-icon">🕐</div>
+          <div>
+            <div class="ib-l" data-bg="Работно време" data-en="Opening Hours">Работно време</div>
+            <div class="ib-v" data-bg="Сряда – Неделя<br>12:00 – 21:00 ч.<br><small style='color:var(--text3)'>Понеделник и Вторник – затворено</small>" data-en="Wednesday – Sunday<br>12:00 – 21:00<br><small style='color:var(--text3)'>Monday and Tuesday – closed</small>">Сряда – Неделя<br>12:00 – 21:00 ч.<br><small style="color:var(--text3)">Понеделник и Вторник – затворено</small></div>
+          </div>
+        </div>
+        <div class="ib">
+          <div class="ib-icon">📞</div>
+          <div><div class="ib-l" data-bg="Телефон за резервации" data-en="Reservations Phone">Телефон за резервации</div><div class="ib-v"><a href="tel:+359879592990">+359 879 592 990</a></div></div>
+        </div>
+        <div class="ib">
+          <div class="ib-icon">✉️</div>
+          <div><div class="ib-l" data-bg="Имейл" data-en="Email">Имейл</div><div class="ib-v"><a href="mailto:corgi.cafe.bulgaria@gmail.com">corgi.cafe.bulgaria@gmail.com</a></div></div>
+        </div>
+        <div class="ib">
+          <div class="ib-icon">🐾</div>
+          <div>
+            <div class="ib-l" data-bg="Социални мрежи" data-en="Social Media">Социални мрежи</div>
+            <div class="ib-v">
+              <a href="https://www.instagram.com/corgis_cafe/" target="_blank" style="color:var(--orange)">Instagram @corgis_cafe</a><br>
+              <a href="https://www.facebook.com/corgiscafebulgaria/" target="_blank" style="color:var(--orange)">Facebook</a> &nbsp;·&nbsp;
+              <a href="https://www.tiktok.com/@corgiscafebulgaria" target="_blank" style="color:var(--orange)">TikTok</a>
+            </div>
+          </div>
+        </div>
+        <a href="https://maps.app.goo.gl/2N7CGwY6ECMHMPB59" target="_blank" class="btn-p reveal" data-bg="🗺 Отвори в Google Maps" data-en="🗺 Open in Google Maps">🗺 Отвори в Google Maps</a>
+      </div>
+      <div class="mapw reveal" style="transition-delay:.15s">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.9!2d23.3222!3d42.6952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa856a6e1cf6cb%3A0x4cf0f0b86f5f3bc5!2sul.%20%22Hristo%20Belchev%22%208%D0%90%2C%201000%20Sofia!5e0!3m2!1sen!2sbg!4v1700000000000!5m2!1sen!2sbg"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          style="filter:invert(90%) hue-rotate(175deg) saturate(0.8)">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESERVATION ===== -->
+<section id="reservation">
+  <div class="container">
+    <div class="resgrid">
+      <div class="reveal">
+        <div class="stag" data-bg="Резервация" data-en="Reservation">Резервация</div>
+        <h2 class="stitle"><span data-bg="Запази" data-en="Reserve">Запази</span><br><span data-bg="своето място" data-en="your table">своето място</span></h2>
+        <p class="ssub" data-bg="Резервирай маса и се увери, че ще имаш достатъчно корги-прегръдки за деня!" data-en="Book a table and make sure you get your corgi cuddles for the day!">Резервирай маса и се увери, че ще имаш достатъчно корги-прегръдки за деня!</p>
+        <div class="fgrid">
+          <div class="fg">
+            <label class="fl" data-bg="Вашето ime" data-en="Your Name">Вашето ime</label>
+            <input class="fi2" type="text" id="r-name" placeholder="Иван Иванов" />
+          </div>
+          <div class="fg">
+            <label class="fl" data-bg="Телефон" data-en="Phone">Телефон</label>
+            <input class="fi2" type="tel" id="r-phone" placeholder="+359 ..." />
+          </div>
+          <div class="fg">
+            <label class="fl" data-bg="Имейл" data-en="Email">Имейл</label>
+            <input class="fi2" type="email" id="r-email" placeholder="you@email.com" />
+          </div>
+          <div class="fg">
+            <label class="fl" data-bg="Брой гости" data-en="Guests">Брой гости</label>
+            <select class="fi2" id="r-guests">
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6+</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="fl" data-bg="Дата" data-en="Date">Дата</label>
+            <input class="fi2" type="date" id="r-date" />
+          </div>
+          <div class="fg">
+            <label class="fl" data-bg="Час" data-en="Time">Час</label>
+            <select class="fi2" id="r-time">
+              <option>12:00</option><option>13:00</option><option>14:00</option>
+              <option>15:00</option><option>16:00</option><option>17:00</option>
+              <option>18:00</option><option>19:00</option><option>20:00</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label class="fl" data-bg="Бележка (по желание)" data-en="Note (optional)">Бележка (по желание)</label>
+            <input class="fi2" type="text" id="r-note" data-bg-placeholder="Специални желания, алергии..." data-en-placeholder="Special requests, allergies..." placeholder="Специални желания, алергии..." />
+          </div>
+          <div class="fg full">
+            <button class="fsub" onclick="submitReservation()" data-bg="🐾 Изпрати резервация" data-en="🐾 Send Reservation">🐾 Изпрати резервация</button>
+            <p class="fnote" data-bg="Ще се свържем с вас за потвърждение в рамките на 24 часа." data-en="We will contact you for confirmation within 24 hours.">Ще се свържем с вас за потвърждение в рамките на 24 часа.</p>
+          </div>
+        </div>
+      </div>
+      <div class="resdeco reveal" style="transition-delay:.2s">
+        <div class="rdcard">
+          <div class="rde">🐕</div>
+          <div class="rdt" data-bg="Корги те чакат!" data-en="Corgis await you!">Корги те чакат!</div>
+          <div class="rdd" data-bg="Всяка резервация включва безплатна игра с корги и неизменна усмивка гарантирана." data-en="Every reservation includes free playtime with corgis and a guaranteed smile.">Всяка резервация включва безплатна игра с корги и неизменна усмивка гарантирана.</div>
+        </div>
+        <div class="rdcard">
+          <div class="rde">📞</div>
+          <div class="rdt" data-bg="Или се обади директно" data-en="Or call us directly">Или се обади директно</div>
+          <div class="rdd"><a href="tel:+359879592990" style="color:var(--orange);font-size:18px;font-weight:700">+359 879 592 990</a><br><span data-bg="Сряда – Неделя, 12–21ч." data-en="Wed – Sun, 12–9pm">Сряда – Неделя, 12–21ч.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MERCH ===== -->
+<section id="merch">
+  <div class="container">
+    <div class="mbn reveal">
+      <div class="mbt" data-bg="🛍 Корги Мърч" data-en="🛍 Corgi Merch">🛍 Корги Мърч</div>
+      <div class="mbs" data-bg="На място може да намериш тениски, чаши, значки и много други корги артикули. Вземи парче от Corgi's Cafe вкъщи!" data-en="On site you can find t-shirts, mugs, badges and many other corgi items. Take a piece of Corgi's Cafe home!">На място може да намериш тениски, чаши, значки и много други корги артикули. Вземи парче от Corgi's Cafe вкъщи!</div>
+      <a href="https://lordi.bg/bg-catalog-details-5.html" target="_blank" class="btn-p" data-bg="🛒 Онлайн магазин" data-en="🛒 Online Shop">🛒 Онлайн магазин</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="fgr">
+      <div>
+        <div class="flogo">🐕 Corgi's Cafe</div>
+        <div class="ftag" data-bg="Най-уютното местенце в София с вкусна веган храна и очарователни корги кученца." data-en="The cosiest spot in Sofia with delicious vegan food and adorable corgi dogs.">Най-уютното местенце в София с вкусна веган храна и очарователни корги кученца.</div>
+        <div class="fsoc">
+          <a href="https://www.instagram.com/corgis_cafe/" target="_blank" class="sb" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/corgiscafebulgaria/" target="_blank" class="sb" title="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@corgiscafebulgaria" target="_blank" class="sb" title="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4 data-bg="Навигация" data-en="Navigation">Навигация</h4>
+        <ul>
+          <li><a href="#about"       data-bg="За нас"    data-en="About">За нас</a></li>
+          <li><a href="#menu"        data-bg="Меню"      data-en="Menu">Меню</a></li>
+          <li><a href="#corgis"      data-bg="Корги"     data-en="Corgis">Корги</a></li>
+          <li><a href="#events"      data-bg="Събития"   data-en="Events">Събития</a></li>
+          <li><a href="#gallery"     data-bg="Галерия"   data-en="Gallery">Галерия</a></li>
+          <li><a href="#reviews"     data-bg="Отзиви"    data-en="Reviews">Отзиви</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4 data-bg="Контакти" data-en="Contact">Контакти</h4>
+        <ul>
+          <li>ул. Христо Белчев 8а</li>
+          <li>1000 София</li>
+          <li><a href="tel:+359879592990">+359 879 592 990</a></li>
+          <li><a href="mailto:corgi.cafe.bulgaria@gmail.com">corgi.cafe.bulgaria@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4 data-bg="Работно Време" data-en="Hours">Работно Време</h4>
+        <ul>
+          <li data-bg="Сряда – Неделя" data-en="Wednesday – Sunday">Сряда – Неделя</li>
+          <li>12:00 – 21:00</li>
+          <li data-bg="Пон. & Вт. – затворено" data-en="Mon. & Tue. – closed">Пон. & Вт. – затворено</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <div class="fcp">© 2025 Corgi's Cafe – Food · Bar · Sofia. <span data-bg="Всички права запазени." data-en="All rights reserved.">Всички права запазени.</span></div>
+      <div class="flang">
+        <button onclick="setLang('bg')" id="flbg" class="act">BG</button>
+        <span>|</span>
+        <button onclick="setLang('en')" id="flen">EN</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CORGI'S CAFE — Main JavaScript
+   ============================================================ */
+
+// ── Language data ──
+let LANG = 'bg';
+
+function setLang(lang) {
+  LANG = lang;
+  document.documentElement.lang = lang === 'bg' ? 'bg' : 'en';
+
+  // Update all elements with data-bg / data-en
+  document.querySelectorAll('[data-bg],[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      const ph = el.getAttribute('data-' + lang + '-placeholder');
+      if (ph) el.placeholder = ph;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+
+  // Update lang buttons
+  document.querySelectorAll('.lb2,.flang button').forEach(btn => {
+    btn.classList.toggle('act', btn.textContent.trim().toUpperCase() === lang.toUpperCase());
+  });
+  document.querySelectorAll('.mmenu .mlang button').forEach(btn => {
+    btn.classList.toggle('act', btn.textContent.trim().toUpperCase() === lang.toUpperCase());
+  });
+}
+
+// ── Loader ──
+(function () {
+  const bar = document.getElementById('lbar');
+  const ltxt = document.getElementById('ltxt');
+  const msgs = ['Зареждаме корги...', 'Приготвяме кафе...', 'Почти готово...'];
+  const msgsEN = ['Loading corgis...', 'Brewing coffee...', 'Almost ready...'];
+  let pct = 0;
+  const iv = setInterval(() => {
+    pct = Math.min(pct + Math.random() * 12 + 3, 100);
+    bar.style.width = pct + '%';
+    const idx = pct < 40 ? 0 : pct < 75 ? 1 : 2;
+    ltxt.textContent = msgs[idx];
+    if (pct >= 100) {
+      clearInterval(iv);
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 400);
+    }
+  }, 60);
+})();
+
+// ── Custom Cursor ──
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,.mc,.ccard,.gi,.evc,.fi,.ib').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
+});
+
+// ── Paw trail ──
+let pawCount = 0;
+document.addEventListener('mousemove', e => {
+  pawCount++;
+  if (pawCount % 9 !== 0) return;
+  const p = document.createElement('div');
+  p.className = 'paw-t';
+  p.textContent = '🐾';
+  p.style.left = e.clientX + 'px';
+  p.style.top  = e.clientY + 'px';
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 950);
+});
+
+// ── Nav scroll effect ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('sc', window.scrollY > 60);
+});
+
+// ── Mobile menu ──
+function toggleMenu() {
+  const m = document.getElementById('mmenu');
+  const b = document.getElementById('hbg');
+  m.classList.toggle('open');
+  const spans = b.querySelectorAll('span');
+  if (m.classList.contains('open')) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans.forEach(s => { s.style.transform=''; s.style.opacity=''; });
+  }
+}
+
+// ── Smooth scroll helper ──
+function scrollTo(sel) {
+  const el = document.querySelector(sel);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── Menu tabs ──
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.mtab').forEach(b => b.classList.remove('act'));
+  document.querySelectorAll('.mpanel').forEach(p => p.classList.remove('act'));
+  btn.classList.add('act');
+  document.getElementById(panelId).classList.add('act');
+}
+
+// ── Scroll reveal ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── Reservation form ──
+function submitReservation() {
+  const name  = document.getElementById('r-name').value.trim();
+  const phone = document.getElementById('r-phone').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const date  = document.getElementById('r-date').value;
+  if (!name || !phone || !date) {
+    showToast(LANG === 'bg' ? '⚠️ Моля попълни задължителните полета!' : '⚠️ Please fill in required fields!');
+    return;
+  }
+  showToast(LANG === 'bg' ? '🐾 Резервацията е изпратена! Ще се свържем скоро.' : '🐾 Reservation sent! We\'ll be in touch soon.');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.querySelector('#toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ── Reviews data ──
+const reviews = [
+  { stars: 5, text_bg: 'Коргита са неустоими! Веганското меню е изненадващо разнообразно и вкусно. Тиквеното лате е фантастично. Ще се върнем!', text_en: 'The corgis are irresistible! The vegan menu is surprisingly varied and delicious. The pumpkin latte is fantastic. We\'ll be back!', name: 'Maria K.', platform: 'Google', emoji: '👩' },
+  { stars: 5, text_bg: 'Намерихме кафето случайно и не съжалявахме нито за секунда. Приятелски персонал, невероятна атмосфера и истински корги!', text_en: 'We found the café by accident and didn\'t regret it for a second. Friendly staff, amazing atmosphere and real corgis!', name: 'Sophie R.', platform: 'HappyCow', emoji: '👱‍♀️' },
+  { stars: 5, text_bg: 'Клуб сандвичът и студеното кафе са перфектна комбинация. Корги Сири дойде да ни поздрави – направи ни деня!', text_en: 'The club sandwich and cold coffee are the perfect combo. Corgi Siri came to greet us – made our day!', name: 'James T.', platform: 'Tripadvisor', emoji: '👨' },
+  { stars: 5, text_bg: 'Почти всичко от менюто е веган! Опитахме клуб сандвича и тиквеното лате – невероятно! И срещнахме корги Сири 💕', text_en: 'Almost every item on the menu is vegan! We tried the club sandwich and pumpkin latte – amazing!! And met the lovely corgi Siri 💕', name: 'Anna L.', platform: 'HappyCow', emoji: '👩‍🦰' },
+  { stars: 5, text_bg: 'Много добра веган храна и пицата с веган салами е страхотна. Корги са мили и игриви. Персоналът говори английски.', text_en: 'Really good vegan food and the vegan salami pizza is great. Corgis are sweet and playful. Staff speak English well.', name: 'Peter V.', platform: 'Tripadvisor', emoji: '🧑' },
+  { stars: 4, text_bg: 'Много добро местенце в центъра на София. Менюто е на разумни цени. Американските панкейки са фантастични!', text_en: 'Very good spot in the center of Sofia. Menu is reasonably priced. The American pancakes are fantastic!', name: 'Elena G.', platform: 'Google', emoji: '👩‍🦳' },
+  { stars: 5, text_bg: 'Пудингът беше невероятен! Исках да изям цялото меню. Корги кафето заслужава много повече признание. Задължително!', text_en: 'The pudding was incredible! I wanted to eat the whole menu. This café deserves so much more recognition. A must visit!', name: 'Yuki M.', platform: 'abillion', emoji: '🧑‍🦱' },
+  { stars: 5, text_bg: 'Вкусна храна и очарователни корги!! Какво повече може да поискаш??? Обичам персонала и атмосферата!', text_en: 'Yummy food and adorable corgis!! What more can you ask for??? Love the staff and the vibe!', name: 'Ren D.', platform: 'HappyCow', emoji: '🧒' },
+];
+
+function buildReviews() {
+  const track = document.getElementById('rvtr');
+  // Duplicate for infinite loop
+  const allReviews = [...reviews, ...reviews];
+  track.innerHTML = allReviews.map(r => `
+    <div class="rvc">
+      <div class="rvs">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      <div class="rvtxt" data-bg="${r.text_bg}" data-en="${r.text_en}">${r.text_bg}</div>
+      <div class="rva">
+        <div class="rvav">${r.emoji}</div>
+        <div>
+          <div class="rv-n">${r.name}</div>
+          <div class="rv-p">${r.platform}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+buildReviews();
+
+// ── Hero Canvas – Particle Field ──
+(function initCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const SYMBOLS = ['🐾', '✦', '·', '✧', '⋆'];
+  const N = 60;
+
+  for (let i = 0; i < N; i++) {
+    particles.push({
+      x: Math.random() * 1200,
+      y: Math.random() * 800,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 12 + 4,
+      alpha: Math.random() * 0.15 + 0.03,
+      sym: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
+      useText: Math.random() > 0.6,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -20) p.x = W + 20;
+      if (p.x > W + 20) p.x = -20;
+      if (p.y < -20) p.y = H + 20;
+      if (p.y > H + 20) p.y = -20;
+
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      if (p.useText) {
+        ctx.font = p.size + 'px serif';
+        ctx.fillText(p.sym, p.x, p.y);
+      } else {
+        ctx.fillStyle = '#f5a623';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size / 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── 3D tilt on menu cards ──
+document.querySelectorAll('.mc,.ccard,.evc').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `translateY(-4px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ── Parallax hero ──
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const corgi = document.querySelector('.hcorgi');
+  if (corgi) corgi.style.transform = `translateY(${y * 0.15}px) rotate(${-3 + y * 0.02}deg)`;
+});
+
+// ── Set today's min date for reservation ──
+(function() {
+  const d = document.getElementById('r-date');
+  if (d) {
+    const today = new Date().toISOString().split('T')[0];
+    d.min = today;
+    d.value = today;
+  }
+})();
+
+// ── Animate stat numbers on scroll ──
+const statNums = document.querySelectorAll('.stat-n');
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.animation = 'none';
+      e.target.offsetHeight;
+      e.target.style.animation = 'statPop 0.6s cubic-bezier(.23,1,.32,1) forwards';
+      statObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+statNums.forEach(n => statObs.observe(n));
+
+// inject stat anim
+const sa = document.createElement('style');
+sa.textContent = '@keyframes statPop{from{opacity:0;transform:scale(.5) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}';
+document.head.appendChild(sa);
+</script>
+</body>
+</html>
+HTMLEOF
+echo "Done — $(wc -l < /mnt/user-data/outputs/corgis-cafe/index.html) lines"
